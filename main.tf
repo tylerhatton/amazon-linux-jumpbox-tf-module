@@ -40,7 +40,7 @@ resource "aws_instance" "jumpbox" {
     device_index         = 0
   }
 
-  tags = merge(map("Name", "${var.name_prefix}jumpbox"), var.default_tags)
+  tags = merge(tomap({ "Name" = "${var.name_prefix}jumpbox" }), var.default_tags)
 }
 
 resource "aws_eip" "jumpbox_mgmt" {
@@ -49,7 +49,7 @@ resource "aws_eip" "jumpbox_mgmt" {
   network_interface         = aws_network_interface.jumpbox_mgmt.id
   associate_with_private_ip = var.private_ip
 
-  tags = merge(map("Name", "${var.name_prefix}jumpbox"), var.default_tags)
+  tags = merge(tomap({ "Name" = "${var.name_prefix}jumpbox" }), var.default_tags)
 
   depends_on = [aws_instance.jumpbox]
 }
@@ -59,7 +59,7 @@ resource "aws_network_interface" "jumpbox_mgmt" {
   security_groups             = [aws_security_group.jumpbox.id]
   private_ips                 = [var.private_ip]
 
-  tags = merge(map("Name", "${var.name_prefix}jumpbox"), var.default_tags)
+  tags = merge(tomap({ "Name" = "${var.name_prefix}jumpbox" }), var.default_tags)
 }
 
 data "aws_network_interface" "jumpbox_mgmt" {
