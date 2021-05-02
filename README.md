@@ -8,7 +8,6 @@ A Terraform module to provide a Linux jumpbox running Amazon Linux that provides
 Module Input Variables
 --------------------------
 
-- `aws_region` - AWS Region location of jumpbox server.
 - `vpc_id` - ID of the VPC where the jumpbox server will reside.
 - `ami_id` - ID of AMI by Jumpbox. Defaults to latest Amazon Linux AMI.
 - `key_pair` - Name of key pair to SSH into jumpbox server.
@@ -28,10 +27,9 @@ Usage
 
 ```hcl
 module "jumpbox" {
-  source           = "git@github.com:wwt/linux-jumpbox-tf-template"
+  source           = "git@github.com:tylerhatton/amazon-linux-jumpbox-tf-module.git
   name_prefix      = "${terraform.workspace}-"
 
-  aws_region       = "us-west-1"
   key_pair         = "test-key"
   vpc_id           = "vpc-09072e62ba8e0dfc0"
   subnet_id        = "subnet-0c1c74a9b2a25646c"
